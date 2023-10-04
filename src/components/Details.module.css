@@ -1,0 +1,56 @@
+.detailsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin-bottom: 30px;
+}
+.svgWrapper {
+  padding: 0px 8px;
+  border-radius: 45px;
+  transition: 0.6s cubic-bezier(0.79, 0.01, 0.15, 0.99);
+}
+.backBtn svg {
+  transform: 0.5s;
+  transition: 0.6s cubic-bezier(0.79, 0.01, 0.15, 0.99);
+}
+.backBtn .back {
+  transition: 0.6s cubic-bezier(0.79, 0.01, 0.15, 0.99);
+  padding-left: 13px;
+  color: #162029;
+}
+.backBtn:hover svg {
+  transform: translateX(-5px);
+  transition: 0.6s cubic-bezier(0.79, 0.01, 0.15, 0.99);
+  cursor: pointer;
+}
+
+.backBtn:hover svg path {
+  fill: #ff7152;
+}
+.backBtn:hover .back {
+  color: #ff7152;
+}
+
+.title {
+  font-size: 51px;
+  line-height: 50px;
+  background: #16202933;
+  border-radius: 20px 20px 0px 0px;
+  padding: 20px;
+  border: 1px solid #16202933;
+}
+
+.detail {
+  padding: 20px;
+  background: #1620290d;
+  border: 1px solid #16202933;
+}
+
+.detail:last-child {
+  border-radius: 0px 0px 20px 20px;
+}

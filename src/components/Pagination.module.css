@@ -1,0 +1,26 @@
+.pagination {
+  margin: 30px auto 0px auto;
+  border: 1px solid #16202933;
+  background: #fff3e5;
+  border-radius: 37px;
+  padding: 20px 5px;
+}
+
+.pagination span {
+  padding: 15px 20px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: 0.6s cubic-bezier(0.79, 0.01, 0.15, 0.99);
+  cursor: pointer;
+}
+.pagination span:hover {
+  background: #a6d0dd3e;
+}
+.active {
+  background: #a6d0dd;
+  border: 1px solid #162029 !important;
+}
+
+.active:hover {
+  background: #a6d0dd !important;
+}
