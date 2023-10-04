@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  position: relative;
 }
 
 .table {
@@ -85,7 +84,6 @@
   background: #ff6969;
   border: 1px solid #162029;
 }
-/* Table.module.css or your CSS file */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -106,8 +104,14 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Add other modal styles as needed */
-
 .alert {
   position: absolute;
+  left: calc(50% - 102.5px);
+  text-align: center;
+  right: auto;
+  color: #ff6969;
+  background: #ff696921;
+  border-radius: 20px;
+  padding: 8px 10px;
+  top: 50px;
 }

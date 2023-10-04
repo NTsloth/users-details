@@ -1,11 +1,13 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "./Details.module.css";
+import { useUserContext } from "../helpers/UserContext";
 
-function Details({ users }) {
+function Details() {
   const { userId } = useParams();
+  const { state } = useUserContext();
 
-  const user = users.find((user) => user.id === parseInt(userId));
+  const user = state.users.find((user) => user.id === parseInt(userId));
 
   if (!user) {
     return <div>User not found</div>;
@@ -16,22 +18,18 @@ function Details({ users }) {
       <div className={styles.backBtn}>
         <div className={styles.svgWrapper}>
           <svg
-            width="14"
-            height="11"
-            viewBox="0 0 14 11"
+            width="24"
+            height="22"
+            viewBox="0 0 24 22"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M-2.18557e-07 5.5C-2.28619e-07 5.26981 0.0914429 5.04905 0.254213 4.88628L4.38628 0.754214C4.72523 0.415263 5.27477 0.415263 5.61372 0.754214C5.95267 1.09316 5.95267 1.64271 5.61372 1.98166L2.09539 5.5L5.61372 9.01834C5.95268 9.35729 5.95268 9.90684 5.61372 10.2458C5.27477 10.5847 4.72523 10.5847 4.38628 10.2458L0.254213 6.11372C0.091443 5.95095 -2.08495e-07 5.73019 -2.18557e-07 5.5Z"
+              d="M9.56965 17.8211C9.37965 17.8211 9.18965 17.7511 9.03965 17.6011L2.96965 11.5311C2.83017 11.39 2.75195 11.1995 2.75195 11.0011C2.75195 10.8027 2.83017 10.6122 2.96965 10.4711L9.03965 4.40109C9.32965 4.11109 9.80966 4.11109 10.0997 4.40109C10.3897 4.69109 10.3897 5.17109 10.0997 5.46109L4.55965 11.0011L10.0997 16.5411C10.3897 16.8311 10.3897 17.3111 10.0997 17.6011C9.95966 17.7511 9.75965 17.8211 9.56965 17.8211Z"
               fill="#162029"
             />
             <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M0.113281 5.49925C0.113281 5.0199 0.50187 4.63131 0.981219 4.63131L12.438 4.63131C12.9173 4.63131 13.3059 5.0199 13.3059 5.49925C13.3059 5.9786 12.9173 6.36719 12.438 6.36719L0.981219 6.36719C0.50187 6.36719 0.113281 5.9786 0.113281 5.49925Z"
+              d="M20.4999 11.75H3.66992C3.25992 11.75 2.91992 11.41 2.91992 11C2.91992 10.59 3.25992 10.25 3.66992 10.25H20.4999C20.9099 10.25 21.2499 10.59 21.2499 11C21.2499 11.41 20.9099 11.75 20.4999 11.75Z"
               fill="#162029"
             />
           </svg>
@@ -51,7 +49,7 @@ function Details({ users }) {
         <strong>City:</strong> {user.address.city}
       </div>
       <div className={styles.detail}>
-        <strong>Address:</strong> {user.address.street}, {user.address.suite},{" "}
+        <strong>Address:</strong> {user.address.street}, {user.address.suite},
         {user.address.city} {user.address.zipcode}
       </div>
     </div>

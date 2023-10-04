@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Delete from "./Delete";
 import Edit from "./Edit";
-import Details from "./Details";
 import Pagination from "./Pagination";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import styles from "./Table.module.css";
+import { useUserContext } from "../helpers/UserContext";
 
 function Table() {
-  const [users, setUsers] = useState([]);
+  const { state, dispatch } = useUserContext();
   const [selectedUser, setSelectedUser] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -22,18 +22,17 @@ function Table() {
     axios
       .get("https://jsonplaceholder.typicode.com/users")
       .then((response) => {
-        setUsers(response.data);
+        dispatch({ type: "SET_USERS", payload: response.data });
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-  }, []);
+  }, [dispatch]);
 
   const deleteUser = (userId) => {
     setIsLoading(true);
     setTimeout(() => {
-      const updatedUsers = users.filter((user) => user.id !== userId);
-      setUsers(updatedUsers);
+      dispatch({ type: "DELETE_USER", payload: userId });
       setIsDeleteModalOpen(false);
       setIsLoading(false);
       setAlertMessage("User deleted successfully.");
@@ -48,10 +47,7 @@ function Table() {
   const updateUser = (updatedUser) => {
     setIsLoading(true);
     setTimeout(() => {
-      const updatedUsers = users.map((user) =>
-        user.id === updatedUser.id ? updatedUser : user
-      );
-      setUsers(updatedUsers);
+      dispatch({ type: "UPDATE_USER", payload: updatedUser });
       setIsEditModalOpen(false);
       setIsLoading(false);
       setAlertMessage("User updated successfully.");
@@ -64,12 +60,12 @@ function Table() {
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = state.users.slice(indexOfFirstUser, indexOfLastUser);
 
   return (
     <div className={`${styles.tableWrapper} container`}>
       {isLoading && <div className="loading">Loading...</div>}
-      <table className={styles.table}>
+      <div className={styles.table}>
         <div className={styles.tableHeader}>
           <h3>Name</h3>
           <h3>Email</h3>
@@ -98,12 +94,12 @@ function Table() {
             </div>
           ))}
         </div>
-      </table>
+      </div>
 
       <Pagination
         className={styles.pagination}
         currentPage={currentPage}
-        totalUsers={users.length}
+        totalUsers={state.users.length}
         usersPerPage={usersPerPage}
         onPageChange={onPageChange}
       />
